@@ -78,14 +78,9 @@ if __name__ == '__main__':
     except IndexError:
         pass
     INPUT_K = 10
-    if DATA_SELECT == 'i':
-        print "INFORMS data"
-        DATA = read_data(1)
-        ATT_TREE = read_tree(2)
-    else:
-        print "BMS-WebView data"
-        DATA = read_data(0)
-        ATT_TREE = read_tree(0)
+    print "INFORMS data"
+    DATA = read_data(1)
+    ATT_TREE = read_tree(2)
     # read generalization hierarchy
     # read record
     # remove duplicate items
@@ -103,8 +98,7 @@ if __name__ == '__main__':
             INPUT_K = int(FLAG)
             get_result_one(ATT_TREE, DATA, INPUT_K)
         except ValueError:
-            print "Usage: python anonymizer [i | b] [k | data]"
-            print "i: INFORMS ataset, b: BMS-WebView dataset"
+            print "Usage: python anonymizer [k | data]"
             print "k: varying k"
             print "data: varying size of dataset"
             print "example: python anonymizer b 10"

@@ -22,7 +22,9 @@ def read_tree(flag=0):
     elif flag == 2:
         return read_tree_file('even')
     else:
-        return read_tree_file('BMS')
+        # TODO
+        gh_list = []
+        return merge_GH()
 
 
 def read_tree_file(treename):
@@ -62,37 +64,22 @@ def read_tree_file(treename):
 def read_data(flag=0):
     """read microda for *.txt and return read data
     """
-    if flag > 0:
-        conditionfile = open('data/conditions.csv', 'rU')
-        print "Reading Data..."
-        conditiondata = {}
-        for i, line in enumerate(conditionfile):
-            if i == 0:
-                continue
-            line = line.strip()
-            # ignore first line of csv
-            row = line.split(',')
-            row[1] = row[1][1:-1]
-            row[2] = row[2][1:-1]
-            try:
-                conditiondata[row[1]].append(row[2])
-            except:
-                conditiondata[row[1]] = [row[2]]
-        conditionfile.close()
-        return conditiondata.values()
-    else:
-        bms_webview2 = open('data/BMS-WebView-2.dat', 'rU')
-        print "Reading Data..."
-        bmwdata = {}
-        for line in bms_webview2:
-            line = line.strip()
-            row = line.split('\t')
-            # use try and except to speed up comparision
-            try:
-                bmwdata[row[0]].append(row[1])
-            except:
-                bmwdata[row[0]] = [row[1]]
-        bms_webview2.close()
-        return bmwdata.values()
+    conditionfile = open('data/conditions.csv', 'rU')
+    print "Reading Data..."
+    conditiondata = {}
+    for i, line in enumerate(conditionfile):
+        if i == 0:
+            continue
+        line = line.strip()
+        # ignore first line of csv
+        row = line.split(',')
+        row[1] = row[1][1:-1]
+        row[2] = row[2][1:-1]
+        try:
+            conditiondata[row[1]].append(row[2])
+        except:
+            conditiondata[row[1]] = [row[2]]
+    conditionfile.close()
+    return conditiondata.values()
     if __DEBUG:
         print "Read Complete..."
